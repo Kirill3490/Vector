@@ -2,17 +2,23 @@ package test.by.epam.javatraining.yanushkevich.maintask.model.logic;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
 
+import by.epam.javatraining.yanushkevich.maintask.model.data.Vector;
+import by.epam.javatraining.yanushkevich.maintask.model.logic.Search;
+import by.epam.javatraining.yanushkevich.maintask.model.logic.Sorting;
 import by.epam.javatraining.yanushkevich.maintask.model.logic.WorkWithVector;
 
 public class WorkWithVectorTest {
+
+	double delta = 0.01;
+
 	@Test
 	public void findMin() {
 		double[] array = { 2.3, 5.7, 12.5, 1.3, 4.9 };
 		double expected = 1.3;
-		double delta = 0.01;
 		assertEquals(expected, WorkWithVector.findMin(array), delta);
 	}
 
@@ -20,7 +26,6 @@ public class WorkWithVectorTest {
 	public void findMax() {
 		double[] array = { 2.3, 5.7, 12.5, 1.3, 4.9 };
 		double expected = 12.5;
-		double delta = 0.01;
 		assertEquals(expected, WorkWithVector.findMax(array), delta);
 	}
 
@@ -28,7 +33,6 @@ public class WorkWithVectorTest {
 	public void findAverage() {
 		double[] array = { 2.3, 5.7, 12.5, 1.3, 4.9 };
 		double expected = 5.34;
-		double delta = 0.01;
 		assertEquals(expected, WorkWithVector.findAverage(array), delta);
 	}
 
@@ -36,7 +40,6 @@ public class WorkWithVectorTest {
 	public void findGeometricMean() {
 		double[] array = { 2.3, 5.7, 12.5, 1.3, 4.9 };
 		double expected = 4.01;
-		double delta = 0.01;
 		assertEquals(expected, WorkWithVector.findGeometricMean(array), delta);
 	}
 
@@ -44,7 +47,6 @@ public class WorkWithVectorTest {
 	public void findGeometricMeanNegative() {
 		double[] array = { 2.3, 5.7, 12.5, -2.0, 4.9 };
 		double expected = -1.0;
-		double delta = 0.01;
 		assertEquals(expected, WorkWithVector.findGeometricMean(array), delta);
 	}
 
@@ -80,7 +82,6 @@ public class WorkWithVectorTest {
 	public void reverse() {
 		double[] array = { 2.3, 5.7, 12.5, 7.0, 4.9 };
 		double[] expected = { 4.9, 7.0, 12.5, 5.7, 2.3 };
-		double delta = 0.01;
 		assertArrayEquals(expected, WorkWithVector.reverse(array), delta);
 	}
 
@@ -103,7 +104,7 @@ public class WorkWithVectorTest {
 		double[] array = { 2.3, 5.7, 12.5, 1.3, 4.9 };
 		double searchingElement = 1.3;
 		int expected = 3;
-		assertEquals(expected, WorkWithVector.linearSearch(array, searchingElement));
+		assertEquals(expected, Search.linearSearch(array, searchingElement));
 	}
 
 	@Test
@@ -111,62 +112,69 @@ public class WorkWithVectorTest {
 		double[] array = { 2.3, 4.9, 5.7, 7.0, 12.5 };
 		double searchingElement = 7.0;
 		int expected = 3;
-		assertEquals(expected, WorkWithVector.binarySearch(array, searchingElement));
+		assertEquals(expected, Search.binarySearch(array, searchingElement));
 	}
 
 	@Test
 	public void increasingBubleSort() {
 		double[] array = { 2.3, 5.7, 12.5, 7.0, 4.9 };
+		Vector vector = new Vector(array);
+		Sorting.increasingBubleSort(vector);
 		double[] expected = { 2.3, 4.9, 5.7, 7.0, 12.5 };
-		double delta = 0.01;
-		assertArrayEquals(expected, WorkWithVector.increasingBubleSort(array), delta);
+		assertArrayEquals(expected, vector.getVector(), delta);
 	}
 
 	@Test
 	public void decreasingBubleSort() {
 		double[] array = { 2.3, 5.7, 12.5, 7.0, 4.9 };
+		Vector vector = new Vector(array);
+		Sorting.decreasingBubleSort(vector);
 		double[] expected = { 12.5, 7.0, 5.7, 4.9, 2.3 };
-		double delta = 0.01;
-		assertArrayEquals(expected, WorkWithVector.decreasingBubleSort(array), delta);
+		assertArrayEquals(expected, vector.getVector(), delta);
 	}
 
 	@Test
 	public void increasingChoiceSort() {
 		double[] array = { 2.3, 5.7, 12.5, 7.0, 4.9 };
+		Vector vector = new Vector(array);
+		Sorting.increasingChoiceSort(vector);
 		double[] expected = { 2.3, 4.9, 5.7, 7.0, 12.5 };
-		double delta = 0.01;
-		assertArrayEquals(expected, WorkWithVector.increasingChoiceSort(array), delta);
+		assertArrayEquals(expected, vector.getVector(), delta);
 	}
 
 	@Test
 	public void decreasingChoiceSort() {
 		double[] array = { 2.3, 5.7, 12.5, 7.0, 4.9 };
+		Vector vector = new Vector(array);
+		Sorting.decreasingChoiceSort(vector);
 		double[] expected = { 12.5, 7.0, 5.7, 4.9, 2.3 };
-		double delta = 0.01;
-		assertArrayEquals(expected, WorkWithVector.decreasingChoiceSort(array), delta);
+		assertArrayEquals(expected, vector.getVector(), delta);
 	}
 
 	@Test
 	public void increasingEnteringSort() {
 		double[] array = { 2.3, 5.7, 12.5, 7.0, 4.9 };
+		Vector vector = new Vector(array);
+		Sorting.increasingEnteringSort(vector);
 		double[] expected = { 2.3, 4.9, 5.7, 7.0, 12.5 };
-		double delta = 0.01;
-		assertArrayEquals(expected, WorkWithVector.increasingEnteringSort(array), delta);
+		assertArrayEquals(expected, vector.getVector(), delta);
 	}
 
 	@Test
 	public void decreasingEnteringSort() {
 		double[] array = { 2.3, 5.7, 12.5, 7.0, 4.9 };
+		Vector vector = new Vector(array);
+		Sorting.decreasingEnteringSort(vector);
 		double[] expected = { 12.5, 7.0, 5.7, 4.9, 2.3 };
-		double delta = 0.01;
-		assertArrayEquals(expected, WorkWithVector.decreasingEnteringSort(array), delta);
+		assertArrayEquals(expected, vector.getVector(), delta);
 	}
 
 	@Test
 	public void quickSort() {
 		double[] array = { 2.3, 5.7, 12.5, 7.0, 4.9 };
+		Vector vector = new Vector(array);
+		Sorting.quickSort(vector, 0, vector.length()-1);
 		double[] expected = { 2.3, 4.9, 5.7, 7.0, 12.5 };
-		double delta = 0.01;
-		assertArrayEquals(expected, WorkWithVector.quickSort(array, 0, array.length - 1), delta);
+		assertArrayEquals(expected, vector.getVector(), delta);
 	}
 }
